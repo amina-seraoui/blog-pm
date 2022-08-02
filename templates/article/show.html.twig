@@ -1,20 +1,26 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ArticleController!{% endblock %}
+{% block title %}{{ article.title }}{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <section class="container">
+        <h1>{{ article.title }}</h1>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+        <hr>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/Stagiaire/Desktop/workspace/symfony/blog-pm/src/Controller/ArticleController.php'|file_link(0) }}">src/Controller/ArticleController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/Stagiaire/Desktop/workspace/symfony/blog-pm/templates/article/index.html.twig'|file_link(0) }}">templates/article/index.html.twig</a></code></li>
-    </ul>
-</div>
+        <article class="mb-5">
+            <div class="row">
+                {% if article.image %}
+                    <div class="col-md-5">
+                        <img src="/uploads/{{ article.image.filename }}" alt="{{ article.image.alt ?? article.title }}" loading="lazy" width="350" height="205">
+                    </div>
+                {% endif %}
+
+                <div class="col-md-7">
+                    <p>{{ article.createdAt|date('d M Y') }}</p>
+                    <p>{{ article.content|raw }}</p>
+                </div>
+            </div>
+        </article>
+    </section>
 {% endblock %}
