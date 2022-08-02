@@ -1,3 +1,6 @@
+{% set menus = menu_service.findAll %}
+{% dump(menus[0].subMenus.count) %}
+
 <!DOCTYPE html>
 <html lang="fr">
     <head>
@@ -23,7 +26,7 @@
 
                     <ul class="dropdown-menu" aria-labelledby="dropdownAdminMenu">
                         <li><a class="dropdown-item" href="{{ path('admin') }}">Tableau de bord</a></li>
-                        <li><a class="dropdown-item" href="#">Menus</a></li>
+                        <li><a class="dropdown-item" href="{{ ea_index('MenuCrudController') }}">Menus</a></li>
                     </ul>
                 </div>
                 <div class="dropdown">
@@ -42,6 +45,27 @@
             <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
                 <a class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none fs-4" href="{{ path('home') }}">Accueil</a>
                 <ul class="nav nav-pills">
+
+                    {% for menu in menus %}
+                        {% if menu.subMenus.count > 0 %}
+                            <div class="dropdown">
+                                <a class="nav nav-link dropdown-toggle text-dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    {{ menu.name }}
+                                </a>
+
+                                <ul class="dropdown-menu">
+                                    {% for subMenu in menu.subMenus %}
+                                        <li><a class="dropdown-item" href="{{ subMenu|menuLink }}">{{ subMenu.name }}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        {% else %}
+                            <li class="nav-item">
+                                <a href="{{ menu|menuLink }}" class="nav-link text-dark">{{ menu.name }}</a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+
                     <li class="nav-item">
                         <a href="#" class="nav-link text-dark">S'inscrire</a>
                     </li>
