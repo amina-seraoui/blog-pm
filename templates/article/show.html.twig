@@ -2,6 +2,8 @@
 
 {% block title %}{{ article.title }}{% endblock %}
 
+{% set count = article.comments|length %}
+
 {% block body %}
     <section class="container">
         <h1>{{ article.title }}</h1>
@@ -22,5 +24,17 @@
                 </div>
             </div>
         </article>
+
+        <h2 class="mt-5">Commentaires (<span class="comment-count">{{ count }}</span>)</h2>
+        <hr>
+        <div class="mb-5">
+            {{  form(commentForm) }}
+        </div>
+
+        <div id="comments">
+            {% for comment in article.comments|reverse %}
+                {% include 'comment/_item.html.twig' with { comment } %}
+            {% endfor %}
+        </div>
     </section>
 {% endblock %}

@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Controller\Model\CreatedAtInterface;
+use App\Controller\Model\UpdatedAtInterface;
 use App\Repository\PageRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: PageRepository::class)]
-class Page implements CreatedAtInterface
+class Page implements UpdatedAtInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]

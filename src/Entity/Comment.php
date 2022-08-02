@@ -2,12 +2,13 @@
 
 namespace App\Entity;
 
+use App\Controller\Model\CreatedAtInterface;
 use App\Repository\CommentRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CommentRepository::class)]
-class Comment
+class Comment implements CreatedAtInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -22,7 +23,16 @@ class Comment
 
     #[ORM\ManyToOne(inversedBy: 'comments')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Article $article = null;
+    private  Article $article;
+
+    #[ORM\ManyToOne(inversedBy: 'comments')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user = null;
+
+    public function __construct(Article $article)
+    {
+        $this->article = $article;
+    }
 
     public function getId(): ?int
     {
@@ -61,6 +71,18 @@ class Comment
     public function setArticle(?Article $article): self
     {
         $this->article = $article;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }
