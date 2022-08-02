@@ -21,11 +21,6 @@ class ArticleRepository extends ServiceEntityRepository
         parent::__construct($registry, Article::class);
     }
 
-    public function getLast()
-    {
-
-    }
-
     public function add(Article $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
