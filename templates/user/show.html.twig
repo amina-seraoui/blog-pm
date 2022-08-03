@@ -8,10 +8,10 @@
             <h2>Profil de {{ user.username|upper }}</h2>
 
             <div class="mb-3">
-                <label for="username" class="form-labek">Nom d'utilisateur</label>
+                <label for="username" class="form-labek=l">Nom d'utilisateur</label>
                 <div class="input-group">
                     <span class="input-group-text">@</span>
-                    <input type="text" class="form-control" value="{{ user.username }}" readonly/>
+                    <input type="text" id="username" class="form-control" value="{{ user.username }}" readonly/>
                 </div>
             </div>
 

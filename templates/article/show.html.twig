@@ -14,7 +14,7 @@
             <div class="row">
                 {% if article.image %}
                     <div class="col-md-5">
-                        <img src="/uploads/{{ article.image.filename }}" alt="{{ article.image.alt ?? article.title }}" loading="lazy" width="350" height="205">
+                        <img src="/uploads/{{ article.image.filename }}" alt="{{ article.image.alt ?? article.title }}" loading="lazy" width="350" height="205" style="max-width: 100%; object-fit: contain">
                     </div>
                 {% endif %}
 
