@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class PageController extends AbstractController
 {
-    #[Route('/{slug}', name: 'page_show')]
+    #[Route('/{slug}', name: 'page_show', priority: -10)]
     public function show(): Response
     {
         return $this->render('page/show.html.twig', [

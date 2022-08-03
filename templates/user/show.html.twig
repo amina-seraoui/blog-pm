@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ user.username }}{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col">
+            <h2>Profil de {{ user.username|upper }}</h2>
+
+            <div class="mb-3">
+                <label for="username" class="form-labek">Nom d'utilisateur</label>
+                <div class="input-group">
+                    <span class="input-group-text">@</span>
+                    <input type="text" class="form-control" value="{{ user.username }}" readonly/>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <p>Nombre de commentaires postés : {{ user.comments|length }}</p>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

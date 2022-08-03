@@ -27,9 +27,14 @@
 
         <h2 class="mt-5">Commentaires (<span class="comment-count">{{ count }}</span>)</h2>
         <hr>
-        <div class="mb-5">
-            {{  form(commentForm) }}
-        </div>
+
+        {% if app.user %}
+            <div class="mb-5">
+                {{  form(commentForm) }}
+            </div>
+        {% else %}
+            <p><a href="{{ path('login') }}">Connectez-vous</a> pour ajouter un commentaire.</p>
+        {% endif %}
 
         <div id="comments">
             {% for comment in article.comments|reverse %}
