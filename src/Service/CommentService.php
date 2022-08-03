@@ -14,7 +14,8 @@ class CommentService
     public function __construct(
         private RequestStack $requestStack,
         private CommentRepository $commentRep,
-        private PaginatorInterface $paginator
+        private PaginatorInterface $paginator,
+        private OptionService $optionService
     ) {}
 
     public function getPaginatedComment(?Article $article = null)
@@ -22,7 +23,8 @@ class CommentService
         $req = $this->requestStack->getMainRequest();
         $page = $req->query->getInt('p', 1);
         $query = $this->commentRep->findForPagination($article);
+        $limit = $this->optionService->getValue('blog_page_comments_limit');
 
-        return $this->paginator->paginate($query, $page, self::LIMIT);
+        return $this->paginator->paginate($query, $page, $limit);
     }
 }

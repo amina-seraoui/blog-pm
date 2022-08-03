@@ -7,6 +7,7 @@ use App\Entity\Category;
 use App\Entity\Comment;
 use App\Entity\Media;
 use App\Entity\Menu;
+use App\Entity\Option;
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
@@ -42,6 +43,11 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToRoute('Retour sur le site', 'fa fa-undo', 'home');
 
         if ($this->isGranted('ROLE_ADMIN')) {
+            yield MenuItem::subMenu('Règlages', 'fas fa-cog')->setSubItems([
+                MenuItem::linkToCrud('Général', 'fas fa-user-cog', Option::class),
+                MenuItem::linkToCrud('Ajouter', 'fas fa-plus', Option::class)->setAction(Crud::PAGE_NEW),
+            ]);
+
             yield MenuItem::subMenu('Menus', 'fas fa-list')->setSubItems([
                 MenuItem::linkToCrud('Pages', 'fas fa-file', Menu::class),
                 MenuItem::linkToCrud('Articles', 'fas fa-newspaper', Menu::class),

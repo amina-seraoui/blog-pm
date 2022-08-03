@@ -1,4 +1,6 @@
 {% set menus = menu_service.findAll %}
+{% set options = option_service.findAll %}
+{% dump(options) %}
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -48,7 +50,9 @@
 
         <div class="container">
             <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
-                <a class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none fs-4" href="{{ path('home') }}">Accueil</a>
+                <a class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none fs-4" href="{{ path('home') }}">
+                    {{ options['blog_title'] }}
+                </a>
                 <ul class="nav nav-pills">
 
                     {% for menu in menus %}
@@ -85,9 +89,11 @@
                             </ul>
                         </div>
                     {% else %}
-                        <li class="nav-item">
-                            <a href="{{ path('register') }}" class="nav-link text-dark">S'inscrire</a>
-                        </li>
+                        {% if options['users_can_register'] == '1' %}
+                            <li class="nav-item">
+                                <a href="{{ path('register') }}" class="nav-link text-dark">S'inscrire</a>
+                            </li>
+                        {% endif %}
                         <li class="nav-item">
                             <a href="{{ path('login') }}" class="nav-link text-dark">Se connecter</a>
                         </li>
@@ -102,7 +108,7 @@
         <footer class="container">
             <div class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
                 <div class="col-md-4 d-flex align-items-center">
-                    <span class="copyright">c {{  'now' | date('Y') }} Pentinimax. Tous droits réservés.</span>
+                    <span class="copyright">{{  'now' | date('Y') }} {{ options['blog_copyright'] }}</span>
                 </div>
             </div>
         </footer>
