@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Article;
 use App\Entity\Comment;
+use App\Service\CommentService;
 use App\Type\CommentType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ArticleController extends AbstractController
 {
     #[Route('/article/{slug}', name: 'article_show')]
-    public function show(?Article $article): Response
+    public function show(?Article $article, CommentService $commentService): Response
     {
         if (!$article) return $this->redirectToRoute('home');
 
@@ -21,7 +22,8 @@ class ArticleController extends AbstractController
 
         return $this->renderForm('article/show.html.twig', [
             'article' => $article,
-            'commentForm' => $commentForm
+            'commentForm' => $commentForm,
+            'comments' => $commentService->getPaginatedComment($article)
         ]);
     }
 }

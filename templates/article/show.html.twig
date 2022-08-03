@@ -37,9 +37,15 @@
         {% endif %}
 
         <div id="comments">
-            {% for comment in article.comments|reverse %}
+            {% for comment in comments %}
                 {% include 'comment/_item.html.twig' with { comment } %}
             {% endfor %}
+
+            <div class="row">
+                <div class="d-flex align-items-center justify-content-center">
+                    {{ knp_pagination_render(comments) }}
+                </div>
+            </div>
         </div>
     </section>
 {% endblock %}

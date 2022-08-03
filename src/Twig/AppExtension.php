@@ -3,6 +3,7 @@
 namespace App\Twig;
 
 use App\Entity\Menu;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use Symfony\Component\Routing\RouterInterface;
 use Twig\Extension\AbstractExtension;
@@ -16,24 +17,21 @@ class AppExtension extends AbstractExtension
     public function __construct(private RouterInterface $router, private AdminUrlGenerator $adminUrlGenerator)
     {}
 
-    public function getFilters(): array
+    public function getFilters()
     {
-        return [
-            new TwigFilter('menuLink', [$this, 'menuLink']),
-        ];
+        yield new TwigFilter('menuLink', [$this, 'menuLink']);
     }
 
     public function getFunctions()
     {
-        return [
-            new TwigFunction('ea_index', [$this, 'getAdminUrl'])
-        ];
+        yield new TwigFunction('admin_url', [$this, 'getAdminUrl']);
     }
 
-    public function getAdminUrl(string $controller): string
+    public function getAdminUrl(string $controller, string $action = 'index'): string
     {
         return $this->adminUrlGenerator
             ->setController(self::ADMIN_NAMESPACE . DIRECTORY_SEPARATOR . $controller)
+            ->setAction($action)
             ->generateUrl()
         ;
     }

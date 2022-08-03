@@ -2,8 +2,10 @@
 
 namespace App\Repository;
 
+use App\Entity\Article;
 use App\Entity\Comment;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -28,6 +30,21 @@ class CommentRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    public function findForPagination(?Article $article = null): Query
+    {
+        $query = $this->createQueryBuilder('c')
+            ->orderBy('c.createdAt', 'DESC')
+        ;
+
+        if ($article) $query
+            ->leftJoin('c.article', 'a')
+            ->where($query->expr()->eq('a.id', ':aId'))
+            ->setParameter('aId', $article->getId())
+        ;
+
+        return $query->getQuery();
     }
 
     public function remove(Comment $entity, bool $flush = false): void
