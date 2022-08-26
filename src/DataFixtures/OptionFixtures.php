@@ -13,7 +13,7 @@ class OptionFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        $options[] = new Option('Titre du blog', 'blog_title', 'Mon blog', TextType::class);
+//        $options[] = new Option('Titre du blog', 'blog_title', 'Mon blog', TextType::class);
         $options[] = new Option('Copyright', 'blog_copyright', '© Pentinimax. Tous droits réservés.', TextType::class);
         $options[] = new Option('Nombre d\'articles par page', 'blog_page_articles_limit', 5, NumberType::class);
         $options[] = new Option('Nombre de commentaire par page', 'blog_page_comments_limit', 5, NumberType::class);

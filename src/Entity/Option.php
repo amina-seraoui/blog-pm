@@ -24,7 +24,7 @@ class Option
     #[ORM\Column(type: Types::TEXT, length: 255, nullable: true)]
     private ?string $value = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $type = null;
 
     /**

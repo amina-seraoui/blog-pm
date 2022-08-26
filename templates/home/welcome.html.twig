@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <title>Bienvenu</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
+
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+        {% endblock %}
+    </head>
+    <body>
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col">
+                    <article class="card">
+                        <div class="card-body">
+                            <h1 class="card-title">Bienvenu !</h1>
+                            <p class="card-text">
+                                <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aliquid beatae dicta, doloribus ea est eveniet, exercitationem hic ipsum necessitatibus nostrum odit optio quibusdam quos recusandae reiciendis tenetur voluptatibus voluptatum.</span><span>Ab architecto eligendi et incidunt numquam quia reprehenderit. Dolore labore, velit! Aperiam beatae consequatur dicta dolor dolorum exercitationem harum illum itaque libero modi non quod, vero, voluptate? Atque, laborum suscipit!</span><span>Autem debitis doloribus eaque illum minima reprehenderit vel veniam vitae! A accusantium asperiores, cumque eaque earum harum impedit incidunt minus molestias odio quae quaerat quasi, reprehenderit saepe voluptates! Autem, laudantium?</span><span>Distinctio mollitia omnis repellat unde vero? Accusamus est fuga ipsa itaque minima natus odit omnis porro quibusdam sit. Architecto consequatur id quae quaerat quidem quis quod sapiente sint temporibus voluptatem.</span><span>Asperiores eos nulla quam quod temporibus. Ab cum distinctio excepturi, fuga suscipit tenetur. Animi aspernatur, ducimus earum error, fugiat hic in maxime odit possimus quis quo saepe tempore totam, voluptate!</span>
+                            </p>
+                            <hr>
+                            <h5 class="card-title">Informations nécessaires</h5>
+                            <hr>
+                            {{ form(form) }}
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
